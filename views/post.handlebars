@@ -3,7 +3,26 @@
   <p>{{{get_emoji}}}</p>
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
-  <p>
-    <button class="btn btn-primary">Leave a Comment</button>
-  </p>
+
+  <div class="comments">
+    <h3>Comments</h3>
+    <ul>
+      {{#each comments}}
+        <li>
+          <strong>{{user.name}}</strong>
+          <p>{{text}}</p>
+          <p>Commented on {{format_date date_created}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <!-- Comment Form -->
+  <div class="comment-form">
+    <form action="/api/posts/comment" method="post">
+      <input type="hidden" name="post_id" value="{{id}}">
+      <textarea name="comment_text" placeholder="Add a comment"></textarea>
+      <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+  </div>
 </div>
